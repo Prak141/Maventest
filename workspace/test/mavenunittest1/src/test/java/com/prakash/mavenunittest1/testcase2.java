@@ -13,7 +13,7 @@ public class testcase2 {
 	
 	@Test
 	public void validatetest() {
-		assertEquals(result,"This is test Method");	
+		assertEquals(result,"This is test Meth");	
 	}
 	
 }
