@@ -13,6 +13,13 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<xray.projectKey>TES</xray.projectKey>
+		<xray.testPlanKey>TES-123</xray.testPlanKey>
+		<xray.testEnvironments>Android</xray.testEnvironments>
+		<xray.fixVersion>V1.0</xray.fixVersion>
+		<xray.revision>Build-1.0</xray.revision>
+		<xray.resultsFormat>JUNIT</xray.resultsFormat>
+		<xray.surefire.location>${basedir}/target/surefire-reports</xray.surefire.location>
 	</properties>
 	<build>
 		<pluginManagement>
@@ -34,29 +41,6 @@
 						</dependency>
 					</dependencies>
 				</plugin>
-				<plugin>
-					<groupId>net.masterthought</groupId>
-					<artifactId>maven-cucumber-reporting</artifactId>
-					<version>2.4.0</version>
-					<executions>
-						<execution>
-							<id>execution</id>
-							<phase>verify</phase>
-							<goals>
-								<goal>generate</goal>
-							</goals>
-							<configuration>
-								<projectName>CucumberReport</projectName>
-								<outputDirectory>${project.basedir}/target/cucumber-html-reports</outputDirectory>
-								<cucumberOutput>${project.basedir}/target/cucumber.json</cucumberOutput>
-								<parallelTesting>false</parallelTesting>
-								<buildNumber>1</buildNumber>
-								<skippedFails>true</skippedFails>
-								<checkBuildResult>false</checkBuildResult>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
@@ -74,4 +58,41 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
+	    <build>
+        <pluginManagement>
+            <plugins>
+             <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-surefire-plugin</artifactId>
+                  <version>2.19.1</version>
+                  <configuration>
+                      <testFailureIgnore>true</testFailureIgnore>
+                  </configuration>
+             </plugin>
+         </plugins>
+      </pluginManagement>
+    </build>
+ 
+    <reporting>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.xpandit.xray</groupId>
+                <artifactId>xray-maven-plugin</artifactId>
+                <version>1.1.0</version>
+            </plugin>
+        </plugins>
+    </reporting>
+ 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>xpand-plugins</id>
+            <name>xpand-plugins</name>
+            <url>http://maven.xpand-it.com/artifactory/releases</url>
+        </pluginRepository>
+    </pluginRepositories>
+	
 </project>
